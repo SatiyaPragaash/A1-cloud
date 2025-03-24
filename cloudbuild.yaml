@@ -19,7 +19,7 @@ steps:
   - id: 'GKE cluster'
     name: 'google/cloud-sdk'
     script: |
-      gcloud container clusters get-credentials assignment3-cluster --region us-central1 --project assignment-454616
+      gcloud container clusters get-credentials assignment3-cluster --zone us-central1-a --project assignment-454616
   - id: 'Deploying to Kubernetes'
     name: 'google/cloud-sdk'
     script: |
