@@ -34,7 +34,7 @@ public class Container2Controller {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String header = br.readLine();
               br.close();
-git             if (header == null || !header.trim().equalsIgnoreCase("product,amount")) {
+             if (header == null || !header.trim().equalsIgnoreCase("product,amount")) {
                 return ResponseEntity.ok().body(new ErrorResponse(request.getFile(),"Input file not in CSV format."));
                 
             }
