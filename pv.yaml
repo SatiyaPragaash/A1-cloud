@@ -9,5 +9,5 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   gcePersistentDisk:
-    pdName: sat-persistent-disk  # <-- Replace this with the name of your GCP persistent disk
+    pdName: sat-persistent-disk
     fsType: ext4
