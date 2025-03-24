@@ -34,16 +34,17 @@ public class Container2Controller {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String header = br.readLine();
               br.close();
-             if (header == null || !header.trim().equalsIgnoreCase("product, amount")) {
+             if (header == null) {
            
-                return ResponseEntity.ok().body(new ErrorResult(request.getFile(), " 1Input file not in CSV format."));
+                return ResponseEntity.ok().body(new ErrorResult(request.getFile(), "Input file not in CSV format."));
                 
             }
             
           
 
             int sum = calculateSum(file, product);
-            return ResponseEntity.ok(new SumResponse(fileName, sum));
+            // return ResponseEntity.ok.body(new SumResponse(fileName, sum));
+            return ResponseEntity.ok().body(new SumResponse(fileName, sum));
         } catch (Exception e) {
             //return ResponseEntity.status(400).body(new ErrorResult(fileName, " 2Input file not in CSV format."));
             return ResponseEntity.ok().body(new ErrorResult(fileName, " 2Input file not in CSV format."));
