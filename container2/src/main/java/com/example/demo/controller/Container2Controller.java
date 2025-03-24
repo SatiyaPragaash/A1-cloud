@@ -36,7 +36,7 @@ public class Container2Controller {
               br.close();
              if (header == null || !header.trim().equalsIgnoreCase("product, amount")) {
            
-                return ResponseEntity.ok().body(new ErrorResult(request.getFile(), "Input file not in CSV format."));
+                return ResponseEntity.ok().body(new ErrorResult(request.getFile(), " 1Input file not in CSV format."));
                 
             }
             
@@ -45,7 +45,8 @@ public class Container2Controller {
             int sum = calculateSum(file, product);
             return ResponseEntity.ok(new SumResponse(fileName, sum));
         } catch (Exception e) {
-            return ResponseEntity.status(400).body(new ErrorResult(fileName, "Input file not in CSV format."));
+            //return ResponseEntity.status(400).body(new ErrorResult(fileName, " 2Input file not in CSV format."));
+            return ResponseEntity.ok().body(new ErrorResult(fileName, " 2Input file not in CSV format."));
         }
     }
 
@@ -67,7 +68,7 @@ public class Container2Controller {
         }
 
         if (!isCsvValid) {
-            throw new IOException("Input file not in CSV format.");
+            throw new IOException(" 3 Input file not in CSV format.");
         }
 
         return sum;
