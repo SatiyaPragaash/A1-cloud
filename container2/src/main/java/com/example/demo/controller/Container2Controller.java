@@ -17,10 +17,10 @@ public class Container2Controller {
 
     // Define the mounted directory path inside the container
     private static final String MOUNTED_DIRECTORY = "/data/";
-    // @GetMapping("/test")
-    // public String test() {
-    //     return "Hello world in container 2s ";
-    // }
+    @GetMapping("/test")
+    public String test() {
+        return "Hello world in container 2s ";
+    }
     @PostMapping
     public ResponseEntity<Object> calculate(@RequestBody RequestPayload request) {
         String fileName = request.getFile();
