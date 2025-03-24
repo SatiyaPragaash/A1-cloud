@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +46,15 @@ public class ApiGatewayController {
             ResponseEntity<?> response = restTemplate.postForEntity(container2Url + "/calculate", request, Object.class);
             return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
         } catch (Exception e) {
-            return ResponseEntity.status(500).body(new ErrorResponse(request.getFile(), "Internal server error while contacting container 2."));
+
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String stackTraceString = sw.toString();
+            System.out.println(stackTraceString);
+
+
+            return ResponseEntity.status(500).body(new ErrorResponse(request.getFile(), stackTraceString));
         }
     }
 }
