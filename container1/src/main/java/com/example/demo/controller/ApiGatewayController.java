@@ -32,7 +32,7 @@ public class ApiGatewayController {
             return ResponseEntity.badRequest().body(new ErrorResponse(null, "Invalid JSON input."));
         }
 
-        File file = new File("/data/" + request.getFile());
+        File file = new File("/Satiya_PV_dir/" + request.getFile());
 
         // Check if the file exists
         if (!file.exists()) {

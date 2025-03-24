@@ -16,7 +16,7 @@ import java.io.IOException;
 public class Container2Controller {
 
     // Define the mounted directory path inside the container
-    private static final String MOUNTED_DIRECTORY = "/data/";
+    private static final String MOUNTED_DIRECTORY = "/Satiya_PV_dir/";
     // @GetMapping("/test")
     // public String test() {
     //     return "Hello world in container 2s ";

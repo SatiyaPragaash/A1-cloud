@@ -35,7 +35,7 @@ public class FileController {
         }
 
         try {
-            File file = new File("/data/" + fileName);
+            File file = new File("/Satiya_PV_dir/" + fileName);
             FileWriter writer = new FileWriter(file);
             writer.write(data);
             writer.close();
