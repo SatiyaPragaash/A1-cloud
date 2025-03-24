@@ -6,11 +6,19 @@ provider "google" {
 resource "google_container_cluster" "primary" {
   name     = "assignment3-cluster"
   location = "us-central1-a" 
+  deletion_protection = false
   remove_default_node_pool = true
   initial_node_count       = 1
 
   network    = "default"
   subnetwork = "default"
+}
+
+resource "google_compute_disk" "persistent_disk" {
+  name  = "sat-persistent-disk"
+  type  = "pd-standard"
+  zone  = "us-central1-a"
+  size  = 1
 }
 
 resource "google_container_node_pool" "primary_nodes" {
@@ -29,11 +37,4 @@ resource "google_container_node_pool" "primary_nodes" {
       "https://www.googleapis.com/auth/cloud-platform"
     ]
   }
-}
-
-resource "google_compute_disk" "persistent_disk" {
-  name  = "sat_persistent_disk"
-  type  = "pd-standard"
-  zone  = "us-central1-a"
-  size  = 1
 }
