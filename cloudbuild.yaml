@@ -2,18 +2,6 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 steps:
-  - id: 'Init terraform'
-    name: 'hashicorp/terraform:latest'
-    dir: './A1/main'
-    script: terraform init
-  - id: 'Plan terraform'
-    name: 'hashicorp/terraform:latest'
-    dir: './A1/main'
-    script: terraform plan
-  - id: 'Apply terraform'
-    name: 'hashicorp/terraform:latest'
-    dir: './A1/main'
-    script: terraform apply --auto-approve
   - id: 'container1 image'
     name: 'gcr.io/cloud-builders/docker'
     dir: './A1/container1'
