@@ -70,7 +70,7 @@ public class Container2Controller {
             while ((line = br.readLine()) != null) {
                 String[] columns = line.split(",");
                 if (columns.length == 2 && columns[0].equalsIgnoreCase(product)) {
-                    sum += Integer.parseInt(columns[1]);
+                    sum += Integer.parseInt(columns[1].trim());
                     isCsvValid = true;
                 }
             }
