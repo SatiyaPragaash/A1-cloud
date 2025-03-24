@@ -10,6 +10,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 @RestController
 @RequestMapping("/calculate")
@@ -43,11 +45,17 @@ public class Container2Controller {
           
 
             int sum = calculateSum(file, product);
-            // return ResponseEntity.ok.body(new SumResponse(fileName, sum));
-            return ResponseEntity.ok().body(new SumResponse(fileName, sum));
+            return ResponseEntity.ok(new SumResponse(fileName, sum));
+            //return ResponseEntity.ok().body(new SumResponse(fileName, sum));
         } catch (Exception e) {
+              StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String stackTraceString = sw.toString();
+            System.out.println(stackTraceString);
+
             //return ResponseEntity.status(400).body(new ErrorResult(fileName, " 2Input file not in CSV format."));
-            return ResponseEntity.ok().body(new ErrorResult(fileName, " 2Input file not in CSV format."));
+            return ResponseEntity.ok().body(new ErrorResult(fileName,stackTraceString));
         }
     }
 
