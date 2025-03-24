@@ -21,7 +21,7 @@ resource "google_container_node_pool" "primary_nodes" {
 
   node_config {
     preemptible  = false
-    machine_type = "e2-micro"
+    machine_type = "e2-medium"
     image_type   = "COS_CONTAINERD"
     disk_size_gb = 10
     disk_type    = "pd-standard"
@@ -29,4 +29,11 @@ resource "google_container_node_pool" "primary_nodes" {
       "https://www.googleapis.com/auth/cloud-platform"
     ]
   }
+}
+
+resource "google_compute_disk" "persistent_disk" {
+  name  = "sat_persistent_disk"
+  type  = "pd-standard"
+  zone  = "us-central1-a"
+  size  = 1
 }

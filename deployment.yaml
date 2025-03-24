@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: A1-app
+  name: a1-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: A1-app
+      app: a1-app
   template:
     metadata:
       labels:
-        app: A1-app
+        app: a1-app
     spec:
       containers:
         - name: container1
@@ -30,24 +30,38 @@ spec:
       volumes:
         - name: storage
           persistentVolumeClaim:
-            claimName: A1-pvc
+            claimName: a1-pvc
+
 
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: A1-service
+  name: a1-service-1
 spec:
   selector:
-    app: A1-app
+    app: a1-app
   ports:
     - name: container1
       protocol: TCP
       port: 80
       targetPort: 6000
+  type: LoadBalancer
+
+
+  ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: a1-service-2
+spec:
+  selector:
+    app: a1-app
+  ports:
     - name: container2
       protocol: TCP
       port: 81
       targetPort: 2000
-  type: LoadBalancer
+
+
