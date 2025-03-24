@@ -55,7 +55,7 @@ public class Container2Controller {
             System.out.println(stackTraceString);
 
             //return ResponseEntity.status(400).body(new ErrorResult(fileName, " 2Input file not in CSV format."));
-            return ResponseEntity.ok().body(new ErrorResult(fileName,stackTraceString));
+            return ResponseEntity.ok().body(new ErrorResult(fileName,"Input file not in CSV format."));
         }
     }
 
@@ -77,7 +77,7 @@ public class Container2Controller {
         }
 
         if (!isCsvValid) {
-            throw new IOException(" 3 Input file not in CSV format.");
+            throw new IOException("Input file not in CSV format.");
         }
 
         return sum;
