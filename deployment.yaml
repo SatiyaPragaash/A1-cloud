@@ -17,7 +17,7 @@ spec:
           image: us-central1-docker.pkg.dev/assignment-454616/container1-image-repo/container1:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 6000
+            - containerPort: 8000
           volumeMounts:
             - mountPath: "/Satiya_PV_dir/"
               name: storage
