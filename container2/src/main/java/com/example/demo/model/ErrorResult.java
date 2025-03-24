@@ -1,10 +1,10 @@
 package com.example.demo.model;
 
-public class ErrorResponse {
+public class ErrorResult {
     private String file;
     private String error;
 
-    public ErrorResponse(String file, String error) {
+    public ErrorResult(String file, String error) {
         this.file = file;
         this.error = error;
     }
