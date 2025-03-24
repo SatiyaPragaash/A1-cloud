@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import org.springframework.web.bind.annotation.*;
-import com.example.demo.model.ErrorResponse;
+import com.example.demo.model.ErrorResult;
 import com.example.demo.model.RequestPayload;
 import com.example.demo.model.SumResponse;
 import org.springframework.http.ResponseEntity;
@@ -36,15 +36,16 @@ public class Container2Controller {
               br.close();
              if (header == null || !header.trim().equalsIgnoreCase("product, amount")) {
            
-                return ResponseEntity.ok().body(new ErrorResponse(request.getFile(), "Input file not in CSV format"));
+                return ResponseEntity.ok().body(new ErrorResult(request.getFile(), "Input file not in CSV format."));
                 
             }
+            
           
 
             int sum = calculateSum(file, product);
             return ResponseEntity.ok(new SumResponse(fileName, sum));
         } catch (Exception e) {
-            return ResponseEntity.status(400).body(new ErrorResponse(fileName, "Input file not in CSV format."));
+            return ResponseEntity.status(400).body(new ErrorResult(fileName, "Input file not in CSV format."));
         }
     }
 
