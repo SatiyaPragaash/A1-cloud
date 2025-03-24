@@ -15,6 +15,7 @@ spec:
       containers:
         - name: container1
           image: us-central1-docker.pkg.dev/assignment-454616/container1-image-repo/container1:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 6000
           volumeMounts:
@@ -22,6 +23,7 @@ spec:
               name: storage
         - name: container2
           image: us-central1-docker.pkg.dev/assignment-454616/container2-image-repo/container2:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 2000
           volumeMounts:
