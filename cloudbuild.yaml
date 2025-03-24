@@ -1,0 +1,40 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+steps:
+  - id: 'Init terraform'
+    name: 'hashicorp/terraform:latest'
+    dir: './A1/main'
+    script: terraform init
+  - id: 'Plan terraform'
+    name: 'hashicorp/terraform:latest'
+    dir: './A1/main'
+    script: terraform plan
+  - id: 'Apply terraform'
+    name: 'hashicorp/terraform:latest'
+    dir: './A1/main'
+    script: terraform apply --auto-approve
+  - id: 'container1 image'
+    name: 'gcr.io/cloud-builders/docker'
+    dir: './A1/container1'
+    script: |
+      docker build -t us-central1-docker.pkg.dev/assignment-454616/container1-image-repo/container1:latest .
+      docker push us-central1-docker.pkg.dev/assignment-454616/container1-image-repo/container1:latest
+    automapSubstitutions: true
+  - id: 'container2 image'
+    name: 'gcr.io/cloud-builders/docker'
+    dir: './A1/container2'
+    script: |
+      docker build -t us-central1-docker.pkg.dev/assignment-454616/container2-image-repo/container2:latest .
+      docker push us-central1-docker.pkg.dev/assignment-454616/container2-image-repo/container2:latest
+    automapSubstitutions: true
+  - id: 'GKE cluster'
+    name: 'google/cloud-sdk'
+    script: |
+      gcloud container clusters get-credentials assignment3-cluster --region us-central1 --project assignment-454616
+  - id: 'Deploying to Kubernetes'
+    name: 'google/cloud-sdk'
+    script: |
+      kubectl apply -f ./A1/pv.yaml
+      kubectl apply -f ./A1/pvc.yaml
+      kubectl apply -f ./A1/deployment.yaml

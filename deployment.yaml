@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: A1-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: A1-app
+  template:
+    metadata:
+      labels:
+        app: A1-app
+    spec:
+      containers:
+        - name: container1
+          image: us-central1-docker.pkg.dev/assignment-454616/container1-image-repo/container1:latest
+          ports:
+            - containerPort: 6000
+          volumeMounts:
+            - mountPath: "/Satiya_PV_dir/"
+              name: storage
+        - name: container2
+          image: us-central1-docker.pkg.dev/assignment-454616/container2-image-repo/container2:latest
+          ports:
+            - containerPort: 2000
+          volumeMounts:
+            - mountPath: "/Satiya_PV_dir/"
+              name: storage
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: A1-pvc
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: A1-service
+spec:
+  selector:
+    app: A1-app
+  ports:
+    - name: container1
+      protocol: TCP
+      port: 80
+      targetPort: 6000
+    - name: container2
+      protocol: TCP
+      port: 81
+      targetPort: 2000
+  type: LoadBalancer

@@ -1,0 +1,15 @@
+
+services:
+  container1:
+    image: sat23/container1
+    ports:
+      - "6000:8000"
+    volumes:
+      - ./:/data/
+  container2:
+    image: sat23/container2
+    ports:
+      - "4000:2000"
+    volumes:
+      - ./:/data/
+
